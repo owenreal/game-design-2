@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm5ted0yhlxp5"]
+
+[ext_resource type="Script" path="res://hello.gd" id="1_bar7y"]
+
+[node name="Hello" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bar7y")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 245.0
+offset_right = 697.0
+offset_bottom = 352.0
+theme_override_font_sizes/font_size = 40
+text = "CLICK MEE!!!!"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
