@@ -1,13 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2ownikcmblr7"]
+[gd_scene load_steps=16 format=3 uid="uid://b2ownikcmblr7"]
 
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="1_m1a4f"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
+[ext_resource type="Resource" path="res://assets/terrains/scene_3d/data.hterrain" id="3_xbpfr"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_b8edo"]
+[ext_resource type="Texture2D" uid="uid://cjrkg1dc7pcmh" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_Color.jpg" id="5_osjrp"]
+[ext_resource type="Texture2D" uid="uid://dov3akhtb1je7" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_Color.jpg" id="6_ch0w5"]
+[ext_resource type="Texture2D" uid="uid://7dbgu05h3w33" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_NormalGL.jpg" id="7_qbmgo"]
+[ext_resource type="Texture2D" uid="uid://b4ma3t1exx0cv" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_NormalGL.jpg" id="8_t8u74"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qt2g1"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vdaj1"]
 
 [sub_resource type="Sky" id="Sky_s5fx5"]
-sky_material = SubResource("ProceduralSkyMaterial_qt2g1")
+sky_material = SubResource("ProceduralSkyMaterial_vdaj1")
 
 [sub_resource type="Environment" id="Environment_dscxw"]
 background_mode = 2
@@ -23,6 +28,11 @@ albedo_color = Color(0.468434, 0.359269, 0.462267, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nc42o"]
 albedo_color = Color(0.452116, 0.489925, 2.88785e-07, 1)
 
+[sub_resource type="Resource" id="Resource_y8aor"]
+script = ExtResource("4_b8edo")
+mode = 0
+textures = [[ExtResource("5_osjrp"), ExtResource("6_ch0w5")], [ExtResource("7_qbmgo"), ExtResource("8_t8u74")]]
+
 [node name="scene_3d" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -35,7 +45,7 @@ light_volumetric_fog_energy = 16.0
 shadow_enabled = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-use_collision = true
+visible = false
 mesh = SubResource("PlaneMesh_3vbou")
 material = SubResource("StandardMaterial3D_jby26")
 
@@ -69,3 +79,22 @@ transform = Transform3D(0.996826, 0, 0.0796074, 0, 1, 0, -0.0796074, 0, 0.996826
 use_collision = true
 size = Vector3(2.27737, 0.347656, 1.78369)
 material = SubResource("StandardMaterial3D_nc42o")
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("2_i6ys4")
+centered = true
+_terrain_data = ExtResource("3_xbpfr")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_y8aor")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
