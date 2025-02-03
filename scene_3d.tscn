@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2ownikcmblr7"]
+[gd_scene load_steps=18 format=3 uid="uid://b2ownikcmblr7"]
 
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="1_m1a4f"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dov3akhtb1je7" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_Color.jpg" id="6_ch0w5"]
 [ext_resource type="Texture2D" uid="uid://7dbgu05h3w33" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_NormalGL.jpg" id="7_qbmgo"]
 [ext_resource type="Texture2D" uid="uid://b4ma3t1exx0cv" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_NormalGL.jpg" id="8_t8u74"]
+[ext_resource type="PackedScene" uid="uid://escwnpg0k5p3" path="res://enemy_3d.tscn" id="9_v6mue"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vdaj1"]
 
@@ -32,6 +33,9 @@ albedo_color = Color(0.452116, 0.489925, 2.88785e-07, 1)
 script = ExtResource("4_b8edo")
 mode = 0
 textures = [[ExtResource("5_osjrp"), ExtResource("6_ch0w5")], [ExtResource("7_qbmgo"), ExtResource("8_t8u74")]]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_htl8k"]
+agent_height = 2.0
 
 [node name="scene_3d" type="Node3D"]
 
@@ -98,3 +102,12 @@ shader_params/u_ground_uv_scale = 20
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_htl8k")
+
+[node name="enemy3d" parent="." instance=ExtResource("9_v6mue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9463, 1.07582, -26.8171)
+
+[node name="enemy3d2" parent="." instance=ExtResource("9_v6mue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.547, 1.07582, -22.0435)

@@ -21,6 +21,8 @@ const BOB_FREQ = 2.4
 const BOB_AMP = 0.08
 var t_bob = 0.0
 
+var inertia = Vector3.ZERO
+# health stuff here
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -57,6 +59,10 @@ func headbob(time):
 	pos.x = cos(time * BOB_FREQ/2) * BOB_AMP
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	return pos
+
+func take_damage(dmg):
+	#make it real
+	OS.alert(\"died\")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(\"ui_cancel\"):
@@ -98,6 +104,9 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
+	velocity += inertia
+	inertia = inertia.move_toward(Vector3.ZERO, delta*1000.0)
+	
 	move_and_slide()
 "
 
@@ -106,7 +115,7 @@ func _physics_process(delta: float) -> void:
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_py7ks"]
 height = 2.00765
 
-[node name="player3d" type="CharacterBody3D"]
+[node name="player3d" type="CharacterBody3D" groups=["Player"]]
 wall_min_slide_angle = 3.14159
 script = SubResource("GDScript_5h67k")
 
