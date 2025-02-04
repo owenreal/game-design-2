@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cponqcw7k51d0"]
+[gd_scene load_steps=6 format=3 uid="uid://cponqcw7k51d0"]
+
+[ext_resource type="PackedScene" uid="uid://so625c0clh7a" path="res://playerhud_3d.tscn" id="1_7dtiw"]
 
 [sub_resource type="GDScript" id="GDScript_5h67k"]
 script/source = "extends CharacterBody3D
@@ -22,7 +24,12 @@ const BOB_AMP = 0.08
 var t_bob = 0.0
 
 var inertia = Vector3.ZERO
-# health stuff here
+
+var MAX_HEALTH = 50
+var HEALTH = MAX_HEALTH
+var damage_lock = 0.0
+
+@onready var HUD = get_tree().get_first_node_in_group(\"HUD\")
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -61,8 +68,16 @@ func headbob(time):
 	return pos
 
 func take_damage(dmg):
-	#make it real
-	OS.alert(\"died\")
+	if damage_lock == 0.0:
+		damage_lock = 0.5
+		HEALTH -= dmg
+		#damage visual
+		if HEALTH <= 0:
+			await get_tree().create_timer(0.25).timeout
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			OS.alert(\"died!!!\")
+			get_tree().reload_current_scene()
+	pass
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(\"ui_cancel\"):
@@ -107,6 +122,14 @@ func _physics_process(delta: float) -> void:
 	velocity += inertia
 	inertia = inertia.move_toward(Vector3.ZERO, delta*1000.0)
 	
+	for enemy in get_tree().get_nodes_in_group(\"Enemy\"):
+		if $feet.overlaps_area(enemy.dmg_area):
+			enemy.take_damage(0)
+	
+	damage_lock = max(damage_lock-delta, 0.0)
+	HUD.healthbar.max_value = MAX_HEALTH
+	HUD.healthbar.value = int(HEALTH)
+	
 	move_and_slide()
 "
 
@@ -114,6 +137,9 @@ func _physics_process(delta: float) -> void:
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_py7ks"]
 height = 2.00765
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ynw47"]
+height = 0.5
 
 [node name="player3d" type="CharacterBody3D" groups=["Player"]]
 wall_min_slide_angle = 3.14159
@@ -135,3 +161,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0340518, 0.764707, 0)
 [node name="Camera3D" type="Camera3D" parent="head"]
 current = true
 fov = 90.0
+
+[node name="playerhud_3d" parent="head/Camera3D" instance=ExtResource("1_7dtiw")]
+offset_left = -10.0
+offset_top = -6.0
+offset_right = -10.0
+offset_bottom = -6.0
+
+[node name="feet" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="feet"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.823438, 0)
+shape = SubResource("CylinderShape3D_ynw47")

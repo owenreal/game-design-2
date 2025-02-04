@@ -9,6 +9,9 @@ var ACCEL = 20
 var ATTACK = 10
 var KNOCKBACK = 16.0
 
+func take_damage(_dmg):
+	self.queue_free()
+
 func _physics_process(delta: float) -> void:
 	for player in get_tree().get_nodes_in_group("Player"):
 		if $AttackRange.overlaps_body(player):
@@ -19,6 +22,8 @@ func _physics_process(delta: float) -> void:
 								.normalized() * KNOCKBACK
 	var dir = (nav_agent.target_position-self.global_position).normalized()
 	velocity = velocity.lerp(dir * SPEED, ACCEL * delta)
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
 	move_and_slide()
