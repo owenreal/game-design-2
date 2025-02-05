@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2ownikcmblr7"]
+[gd_scene load_steps=17 format=3 uid="uid://b2ownikcmblr7"]
 
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="1_m1a4f"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://7dbgu05h3w33" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_NormalGL.jpg" id="7_qbmgo"]
 [ext_resource type="Texture2D" uid="uid://b4ma3t1exx0cv" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_NormalGL.jpg" id="8_t8u74"]
 [ext_resource type="PackedScene" uid="uid://escwnpg0k5p3" path="res://enemy_3d.tscn" id="9_v6mue"]
+[ext_resource type="PackedScene" uid="uid://biib05kxaiefy" path="res://change_lvl.tscn" id="10_3qjky"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vdaj1"]
 
@@ -100,3 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9463, 1.07582, -26.8171)
 
 [node name="enemy3d2" parent="." instance=ExtResource("9_v6mue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.547, 1.07582, -22.0435)
+
+[node name="change_lvl" parent="." instance=ExtResource("10_3qjky")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5261, 2.37405, 4.44099)
+next_level = "player_3d"

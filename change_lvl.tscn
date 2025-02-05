@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://biib05kxaiefy"]
+
+[ext_resource type="Script" path="res://change_lvl.gd" id="1_0v6mo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6wwn"]
+transparency = 1
+albedo_color = Color(0.492513, 0.940774, 0.404107, 0.682353)
+
+[sub_resource type="BoxMesh" id="BoxMesh_77vyj"]
+material = SubResource("StandardMaterial3D_d6wwn")
+size = Vector3(4, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1fsg4"]
+size = Vector3(4, 4, 4)
+
+[node name="change_lvl" type="Area3D"]
+script = ExtResource("1_0v6mo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_77vyj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1fsg4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
