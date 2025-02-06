@@ -104,4 +104,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.547, 1.07582, -22.0435)
 
 [node name="change_lvl" parent="." instance=ExtResource("10_3qjky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5261, 2.37405, 4.44099)
-next_level = "player_3d"
+next_level = "scene_3d_2"
