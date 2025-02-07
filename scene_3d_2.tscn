@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://7oh13t47s2nr"]
+[gd_scene load_steps=18 format=3 uid="uid://7oh13t47s2nr"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_e88tt"]
 [ext_resource type="Resource" path="res://assets/terrains/scene_3d_2/data.hterrain" id="2_pwwym"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dpy1x6dea5m4j" path="res://assets/textures/Ground068_1K-JPG/Ground068_1K-JPG_NormalGL.jpg" id="7_rifw7"]
 [ext_resource type="Texture2D" uid="uid://cr7omxvrlovn2" path="res://assets/textures/Metal055C_1K-JPG/Metal055C_1K-JPG_NormalGL.jpg" id="8_xhgvw"]
 [ext_resource type="Texture2D" uid="uid://cjm8uffdaauxd" path="res://assets/textures/Rock031_1K-JPG/Rock031_1K-JPG_NormalGL.jpg" id="9_gsnim"]
+[ext_resource type="PackedScene" uid="uid://baqeanh85l4dg" path="res://kickball.tscn" id="11_ynbmg"]
+[ext_resource type="PackedScene" uid="uid://b6pnhkwp7yi2c" path="res://pushblock.tscn" id="12_c585t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5de8i"]
 sky_top_color = Color(0.0439255, 0.0619628, 0.0870453, 1)
@@ -91,3 +93,9 @@ visible = false
 radius = 100.0
 smooth_faces = false
 material = SubResource("StandardMaterial3D_4mtww")
+
+[node name="kickball" parent="." instance=ExtResource("11_ynbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8885, 1.34674, -1.80502)
+
+[node name="pushblock" parent="." instance=ExtResource("12_c585t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.379, 2.92197, 203.627)
