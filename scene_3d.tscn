@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2ownikcmblr7"]
+[gd_scene load_steps=20 format=3 uid="uid://b2ownikcmblr7"]
 
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="1_m1a4f"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://biib05kxaiefy" path="res://change_lvl.tscn" id="10_3qjky"]
 [ext_resource type="PackedScene" uid="uid://b6pnhkwp7yi2c" path="res://pushblock.tscn" id="11_q2bwn"]
 [ext_resource type="PackedScene" uid="uid://baqeanh85l4dg" path="res://kickball.tscn" id="12_2iawy"]
+[ext_resource type="PackedScene" uid="uid://bvxx47enkueiv" path="res://sketchfab_scene.tscn" id="13_wq8si"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vdaj1"]
 
@@ -113,3 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3326, 1.57532, 9.80931)
 
 [node name="kickball" parent="." instance=ExtResource("12_2iawy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.78281, 0.728098, 2.88606)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("13_wq8si")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 42.1961, 0.0272563, 7.7836)
