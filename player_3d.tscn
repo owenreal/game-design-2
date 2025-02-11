@@ -107,25 +107,26 @@ func _physics_process(delta: float) -> void:
 		SPEED = WALK_SPEED
 		FOV_CHANGE = 1.0
 	
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		animator.play(\"Fall\")
 	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
 	var input_dir := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		if SPEED == WALK_SPEED:
+		if SPEED == WALK_SPEED and is_on_floor():
 			animator.play(\"Walk\")
-		else:
+		elif SPEED == SPRINT_SPEED and is_on_floor():
 			animator.play(\"Run\")
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	else:
-		animator.play(\"Idle\")
+	elif not direction:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if is_on_floor():
+			animator.play(\"Idle\")
 	
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = headbob(t_bob)
