@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7oh13t47s2nr"]
+[gd_scene load_steps=19 format=3 uid="uid://7oh13t47s2nr"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_e88tt"]
 [ext_resource type="Resource" path="res://assets/terrains/scene_3d_2/data.hterrain" id="2_pwwym"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cjm8uffdaauxd" path="res://assets/textures/Rock031_1K-JPG/Rock031_1K-JPG_NormalGL.jpg" id="9_gsnim"]
 [ext_resource type="PackedScene" uid="uid://baqeanh85l4dg" path="res://kickball.tscn" id="11_ynbmg"]
 [ext_resource type="PackedScene" uid="uid://b6pnhkwp7yi2c" path="res://pushblock.tscn" id="12_c585t"]
+[ext_resource type="PackedScene" uid="uid://biib05kxaiefy" path="res://change_lvl.tscn" id="13_radeb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5de8i"]
 sky_top_color = Color(0.0439255, 0.0619628, 0.0870453, 1)
@@ -99,3 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8885, 1.34674, -1.80502)
 
 [node name="pushblock" parent="." instance=ExtResource("12_c585t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128.379, 2.92197, 203.627)
+
+[node name="change_lvl" parent="." instance=ExtResource("13_radeb")]
+transform = Transform3D(0.898066, 0, -0.439861, 0, 1, 0, 0.439861, 0, 0.898066, 76.5713, 19.2705, 21.01)
+next_level = "scene_3d_3"

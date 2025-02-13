@@ -107,7 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.9463, 1.07582, -26.8171)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.547, 1.07582, -22.0435)
 
 [node name="change_lvl" parent="." instance=ExtResource("10_3qjky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5261, 2.37405, 4.44099)
+transform = Transform3D(0.999784, 0.0208028, 0, -0.0208028, 0.999784, 0, 0, 0, 1, 41.3283, 9.21388, 35.5411)
 next_level = "scene_3d_2"
 
 [node name="pushblock" parent="." instance=ExtResource("11_q2bwn")]
