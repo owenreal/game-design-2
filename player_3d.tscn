@@ -99,6 +99,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed(\"change_camera\"):
 		toggle_camera_parent()
+	if Input.is_action_just_pressed(\"reset_test\"):
+		get_tree().call_deferred(\"reload_current_scene\")
 	
 	if Input.is_action_pressed(\"sprint\"):
 		SPEED = SPRINT_SPEED
