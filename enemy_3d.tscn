@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://escwnpg0k5p3"]
+[gd_scene load_steps=9 format=3 uid="uid://escwnpg0k5p3"]
 
 [ext_resource type="Script" path="res://enemy_3d.gd" id="1_pda8k"]
+[ext_resource type="PackedScene" uid="uid://jovb5qjqqgus" path="res://assets/models/vanguard_guy.gltf" id="2_xa6v6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cggee"]
 
@@ -8,21 +9,29 @@
 albedo_color = Color(0.787661, 0.21876, 0.209543, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d8mao"]
+radius = 0.298476
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xsvr8"]
 radius = 8.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5cbw"]
-radius = 0.75
+radius = 0.412104
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3v3rk"]
+radius = 0.350029
 
 [node name="enemy3d" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_pda8k")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 100.01
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.0941176, 0.0588235, 1)
+debug_path_custom_point_size = 50.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_cggee")
 surface_material_override/0 = SubResource("StandardMaterial3D_eh5q8")
 
@@ -42,5 +51,8 @@ shape = SubResource("CapsuleShape3D_a5cbw")
 [node name="DamageArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69644, 0)
 shape = SubResource("SphereShape3D_3v3rk")
+
+[node name="AuxScene" parent="." instance=ExtResource("2_xa6v6")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, -0.0225371, -0.0463266, 0.00335175)
