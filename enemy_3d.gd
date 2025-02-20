@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var animator = $AuxScene/AnimationPlayer
 
-var SPEED = 3.0
+var SPEED = 5.0
 var ACCEL = 20
 var ATTACK = 10
 var KNOCKBACK = 16.0
@@ -25,16 +25,18 @@ func _physics_process(delta: float) -> void:
 			SPEED = RUNSPEED
 		else:
 			SPEED = WALKSPEED
+		if nav_agent.distance_to_target() == 0:
+			nav_agent.target_position = global_position
 		if atk_area.overlaps_body(player):
 			player.take_damage(ATTACK)
 			player.inertia = (player.global_position-global_position)\
 								.normalized() * KNOCKBACK
 	var dir = (nav_agent.target_position-self.global_position)
 	dir.y = 0
-	if dir.length() > 0.01:
+	if dir.length() > 0.01 and nav_agent.target_position != global_position:
 		var rot_angle = atan2(dir.x, dir.z)
 		self.rotation.y = lerp_angle(rotation.y, rot_angle, 5 * delta)
-	velocity = velocity.lerp(dir.normalized() * SPEED, ACCEL * delta)
+		velocity = velocity.lerp(dir.normalized() * SPEED, ACCEL * delta)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
