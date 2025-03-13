@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://df0wd8b1qs00i"]
 
 [ext_resource type="Texture2D" uid="uid://djspxs1xwmf4q" path="res://assets/textures/ChristmasTreeOrnament017_1K-JPG/ChristmasTreeOrnament017_1K-JPG_Color.jpg" id="1_5pato"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_yn03x"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_01vqk"]
-[ext_resource type="Resource" path="res://assets/terrains/data.hterrain" id="3_tfr7q"]
+[ext_resource type="Script" uid="uid://dnt1wwesbivwb" path="res://addons/zylann.hterrain/hterrain.gd" id="2_yn03x"]
+[ext_resource type="Script" uid="uid://chbvqbju7x3rn" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_01vqk"]
+[ext_resource type="Resource" uid="uid://pcqckhq313m8" path="res://assets/terrains/data.hterrain" id="3_tfr7q"]
 [ext_resource type="Texture2D" uid="uid://cyk7sydrmxqpj" path="res://assets/textures/Rock026_1K-JPG/Rock026_1K-JPG_Color.jpg" id="5_hv37q"]
 [ext_resource type="Texture2D" uid="uid://dfafere0eypex" path="res://assets/textures/Rock026_1K-JPG/Rock026_1K-JPG_NormalGL.jpg" id="6_0s5bn"]
 [ext_resource type="Texture2D" uid="uid://blx6fd86ydoj8" path="res://assets/textures/Tiles086_1K-JPG/Tiles086_1K-JPG_Color.jpg" id="6_6bmby"]

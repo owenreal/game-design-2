@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://7oh13t47s2nr"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_e88tt"]
-[ext_resource type="Resource" path="res://assets/terrains/scene_3d_2/data.hterrain" id="2_pwwym"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_uo2py"]
+[ext_resource type="Script" uid="uid://dnt1wwesbivwb" path="res://addons/zylann.hterrain/hterrain.gd" id="1_e88tt"]
+[ext_resource type="Resource" uid="uid://dyf328el87e0c" path="res://assets/terrains/scene_3d_2/data.hterrain" id="2_pwwym"]
+[ext_resource type="Script" uid="uid://chbvqbju7x3rn" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_uo2py"]
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="4_4a1kj"]
 [ext_resource type="Texture2D" uid="uid://dhl7pupditoh5" path="res://assets/textures/Ground068_1K-JPG/Ground068_1K-JPG_Color.jpg" id="4_82sub"]
 [ext_resource type="Texture2D" uid="uid://d2qbmptg240m5" path="res://assets/textures/Metal055C_1K-JPG/Metal055C_1K-JPG_Color.jpg" id="5_riod8"]

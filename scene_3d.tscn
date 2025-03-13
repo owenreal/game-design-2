@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://b2ownikcmblr7"]
 
 [ext_resource type="PackedScene" uid="uid://cponqcw7k51d0" path="res://player_3d.tscn" id="1_m1a4f"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
-[ext_resource type="Resource" path="res://assets/terrains/scene_3d/data.hterrain" id="3_xbpfr"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_b8edo"]
+[ext_resource type="Script" uid="uid://dnt1wwesbivwb" path="res://addons/zylann.hterrain/hterrain.gd" id="2_i6ys4"]
+[ext_resource type="Resource" uid="uid://cvcq43n6dsgyc" path="res://assets/terrains/scene_3d/data.hterrain" id="3_xbpfr"]
+[ext_resource type="Script" uid="uid://chbvqbju7x3rn" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_b8edo"]
 [ext_resource type="Texture2D" uid="uid://cjrkg1dc7pcmh" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_Color.jpg" id="5_osjrp"]
 [ext_resource type="Texture2D" uid="uid://dov3akhtb1je7" path="res://assets/textures/Bark014_1K-JPG/Bark014_1K-JPG_Color.jpg" id="6_ch0w5"]
 [ext_resource type="Texture2D" uid="uid://7dbgu05h3w33" path="res://assets/textures/Grass001_1K-JPG/Grass001_1K-JPG_NormalGL.jpg" id="7_qbmgo"]
