@@ -17,6 +17,7 @@ sky = SubResource("Sky_b4hk2")
 tonemap_mode = 2
 
 [node name="FpsWorld1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0468025, 0.165274, 0.264919)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hcg5i")
@@ -29,7 +30,7 @@ shadow_enabled = true
 transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -6.02463, 0, -4.28336)
 
 [node name="fps_enemy" parent="." instance=ExtResource("2_67qoq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0762, 0.878194, -24.4477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0762, 0.878194, -10.9024)
 
 [node name="fps_player" parent="." instance=ExtResource("3_b4hk2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7388, 1, -15.0441)
