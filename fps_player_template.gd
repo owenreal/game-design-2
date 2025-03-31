@@ -30,7 +30,7 @@ var muzzle
 var old_blaster_y
 var dart_scene = preload("res://fps_dart.tscn")
 
-var spray_lock = 0.0 # prevent infinite spray
+var spray_lock = 0.0  # Prevent infinite spray
 var NORMAL_SPRAY_AMOUNT = 0.03
 var CROUCH_SPRAY_AMOUNT = 0.01
 var SPRAY_AMOUNT = NORMAL_SPRAY_AMOUNT
@@ -45,19 +45,25 @@ var is_reloading = false
 var NORMAL_HEIGHT = 2.0
 var CROUCH_HEIGHT = 1.25
 var NORMAL_COLLISION_RAD = 0.5
-var CROUCH_COLLISION_RAD = 0.5
+var CROUCH_COLLISION_RAD = 0.8
 var NORMAL_HEAD = 0.8
 var CROUCH_HEAD = 0.4
 
 var unaim_pos = Vector3(0.219, -0.27, -0.421)
-var aim_pos = Vector3(0, -0.14, -0.511)
+var aim_pos   = Vector3(0, -0.14, -0.511)
 var unaim_fov = 75.0
-var aim_fov = 45.0
-var unaim_quat = euler_degrees_to_quat(Vector3(20.1, 31.7, 0))
-var aim_quat = euler_degrees_to_quat(Vector3(11.6, 0, 0))
-var target_pos = unaim_pos
-var target_quat = unaim_quat # rotation
-var target_fov = unaim_fov
+var aim_fov   = 45.0
+var unaim_quat = euler_degrees_to_quat(Vector3(28.1, 31.7, 0))
+var aim_quat   = euler_degrees_to_quat(Vector3(11.6, 0, 0))
+var target_pos  = unaim_pos
+var target_quat = unaim_quat  # rotation
+var target_fov  = unaim_fov
+
+@onready var audio_player = $AudioStreamPlayer3D
+var reload_sound = preload("res://assets/audio/fps/recharge.mp3")
+var hit_sound = preload("res://assets/audio/fps/hitHurt (1).wav")
+var dink_sound = preload("res://assets/audio/fps/hitHead.wav")
+
 
 func degrees_to_radians(degrees: Vector3) -> Vector3:
 	return Vector3(
@@ -66,6 +72,7 @@ func degrees_to_radians(degrees: Vector3) -> Vector3:
 		deg_to_rad(degrees.z)
 	)
 
+
 func radians_to_degrees(radians: Vector3) -> Vector3:
 	return Vector3(
 		rad_to_deg(radians.x),
@@ -73,8 +80,10 @@ func radians_to_degrees(radians: Vector3) -> Vector3:
 		rad_to_deg(radians.z)
 	)
 
+
 func euler_degrees_to_quat(euler_degrees: Vector3) -> Quaternion:
 	return Quaternion.from_euler(degrees_to_radians(euler_degrees))
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -89,7 +98,7 @@ func _physics_process(delta):
 		SPEED = WALK_SPEED
 	else:
 		SPEED = NORMAL_SPEED
-
+	
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -107,21 +116,22 @@ func _physics_process(delta):
 	
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	var hbob = headbob(t_bob)
-	camera.transform.origin = hbob 
+	camera.transform.origin = hbob
 	
 	damage_lock = max(damage_lock-delta, 0.0)
 	velocity += inertia
 	inertia = inertia.move_toward(Vector3(), delta * 1000.0)
 	
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_pressed("fire"):
 		do_fire()
 	spray_lock = max(spray_lock - delta, 0.0)
 	
 	if Input.is_action_just_pressed("reload") or \
-	(Input.is_action_just_pressed("fire") and AMMO == 0):
+	  (Input.is_action_just_pressed("fire") and AMMO == 0):
 		if TOTAL_AMMO > 0 and not is_reloading and AMMO != CLIP_SIZE:
 			is_reloading = true
-			# sound and anims here
+			audio_player.stream = reload_sound
+			audio_player.play()
 			await get_tree().create_timer(2).timeout
 			var ammo_needed = CLIP_SIZE - AMMO
 			var new_ammo = min(ammo_needed, TOTAL_AMMO)
@@ -129,23 +139,26 @@ func _physics_process(delta):
 			TOTAL_AMMO -= new_ammo
 			is_reloading = false
 	
-	# hud things
+	$HUD/Label/lblHealth.text = "%d/%d" % [int(HEALTH), MAX_HEALTH]
+	$HUD/Label2/lblAmmo.text  = "%d/%d" % [int(AMMO), TOTAL_AMMO]
+	if damage_lock == 0.0:
+		$HUD/overlay.material = null
 	
 	if Input.is_action_pressed("aim_sight"):
-		target_pos = aim_pos
-		target_quat = aim_quat
-		target_fov = aim_fov
+		target_pos   = aim_pos
+		target_quat  = aim_quat
+		target_fov   = aim_fov
 		SPRAY_AMOUNT = CROUCH_SPRAY_AMOUNT
-	
 	if Input.is_action_just_released("aim_sight"):
-		target_pos = unaim_pos
-		target_quat = unaim_quat
-		target_fov = unaim_fov
+		target_pos   = unaim_pos
+		target_quat  = unaim_quat
+		target_fov   = unaim_fov
 		SPRAY_AMOUNT = NORMAL_SPRAY_AMOUNT
 	$Head/Camera3D.fov = lerp($Head/Camera3D.fov, target_fov, delta*5.0)
 	blaster.position = blaster.position.lerp(target_pos, delta*10.0)
-	blaster.position.y = clamp(old_blaster_y + (hbob.y*0.05 if is_on_floor() else 0),
-								old_blaster_y-0.5, old_blaster_y+05)
+	blaster.position.y = clamp(old_blaster_y + 
+							   (hbob.y*0.05 if is_on_floor() else 0),
+							   old_blaster_y-0.5, old_blaster_y+0.5)
 	var cur_quat = euler_degrees_to_quat(blaster.rotation_degrees)
 	blaster.rotation_degrees = radians_to_degrees(
 		cur_quat.slerp(target_quat, delta*10.0).get_euler()
@@ -158,7 +171,7 @@ func _physics_process(delta):
 		$Head.position.y = lerp($Head.position.y, CROUCH_HEAD, delta*5.0)
 		SPRAY_AMOUNT = CROUCH_SPRAY_AMOUNT
 	if Input.is_action_just_released("crouch"):
-		$CollisionShape3D.shape.height = NORMAL_HEIGHT 
+		$CollisionShape3D.shape.height = NORMAL_HEIGHT
 		$CollisionShape3D.shape.radius = NORMAL_COLLISION_RAD
 		$MeshInstance3D.scale.y = 1.0
 		$Head.position.y = lerp($Head.position.y, NORMAL_HEAD, delta*5.0)
@@ -172,12 +185,11 @@ func _physics_process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		OS.alert("You died!")
 		get_tree().reload_current_scene()
-	
-	if len(get_tree().get_nodes_in_group("Enemy")) <= 0:
+	elif len(get_tree().get_nodes_in_group("Enemy")) <= 0:
 		await get_tree().create_timer(0.25).timeout
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		OS.alert("you win")
-		# change level or other things here
+		OS.alert("You win!")
+		# TODO: change scene
 		get_tree().quit()
 	
 	# Right Joystick
@@ -201,6 +213,10 @@ func take_damage(dmg, override=false, headshot=false, _spawn_origin=null):
 		var dmg_intensity = clamp(1.0-((HEALTH+0.01)/MAX_HEALTH), 0.1, 0.8)
 		$HUD/overlay.material = damage_shader.duplicate()
 		$HUD/overlay.material.set_shader_parameter("intensity", dmg_intensity)
+		if audio_player.playing:
+			await audio_player.finished
+		audio_player.stream = dink_sound if headshot else hit_sound
+		audio_player.play()
 
 
 func headbob(time):

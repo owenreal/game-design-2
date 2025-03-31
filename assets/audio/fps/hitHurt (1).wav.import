@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5jtvar2tk0vn"
+path="res://.godot/imported/hitHurt (1).wav-a67096c094da9009be37e34bf4154295.sample"
+
+[deps]
+
+source_file="res://assets/audio/fps/hitHurt (1).wav"
+dest_files=["res://.godot/imported/hitHurt (1).wav-a67096c094da9009be37e34bf4154295.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

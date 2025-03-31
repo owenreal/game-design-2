@@ -1,15 +1,15 @@
 extends RigidBody3D
 
 var ATTACK = 5
-var ATTACK_CRIT = ATTACK * 2
+var ATTACK_CRIT = 2 * ATTACK
 var SPEED = 50
 var DROP = 0.001
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * DROP
 var spawn_origin: Vector3
 
-# audio things here
+# TODO: audio stuff
 
-func _ready() -> void:
+func _ready():
 	$Timer.start()
 	spawn_origin = self.global_position
 
@@ -27,7 +27,7 @@ func do_damage(group):
 		if entity != get_parent():
 			if $Area3D.overlaps_area(entity.head):
 				entity.take_damage(ATTACK*2.5 + crit, true, true, spawn_origin)
-			if $Area3D.overlaps_area(entity):
+			if $Area3D.overlaps_body(entity):
 				entity.take_damage(ATTACK + crit, true, false, spawn_origin)
 
 func do_fire(camera, muzzle, spray_amount, attack=ATTACK):
@@ -37,8 +37,6 @@ func do_fire(camera, muzzle, spray_amount, attack=ATTACK):
 	var rnd_x = randf_range(-1, 1) * spray_amount
 	var rnd_y = randf_range(-1, 1) * spray_amount
 	var spray_dir = cam_forward + camera.global_transform.basis.x * rnd_x + \
-									camera.global_transform.basis.y * rnd_y
+								   camera.global_transform.basis.y * rnd_y
 	self.global_transform.origin = muzzle.global_transform.origin
 	self.linear_velocity = -spray_dir.normalized() * SPEED
-	
-	
