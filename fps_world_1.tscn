@@ -35,5 +35,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4008, -2.63627, -45.9239)
 [node name="fps_enemy2" parent="." instance=ExtResource("2_67qoq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02922, 1.9551, -49.1322)
 
+[node name="fps_enemy3" parent="." instance=ExtResource("2_67qoq")]
+transform = Transform3D(-0.0919188, 0, -0.995767, 0, 1, 0, 0.995767, 0, -0.0919188, 45.2864, 2.96241, -29.233)
+
+[node name="fps_enemy4" parent="." instance=ExtResource("2_67qoq")]
+transform = Transform3D(0.995944, 0, 0.089972, 0, 1, 0, -0.089972, 0, 0.995944, 35.7189, 1.27621, -72.464)
+
+[node name="fps_enemy5" parent="." instance=ExtResource("2_67qoq")]
+transform = Transform3D(-0.121124, 0, 0.992637, 0, 1, 0, -0.992637, 0, -0.121124, -20.9724, -2.49573, -66.8839)
+
 [node name="fps_player" parent="." instance=ExtResource("3_b4hk2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7388, 1, -15.0441)
