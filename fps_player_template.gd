@@ -185,12 +185,6 @@ func _physics_process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		OS.alert("You died!")
 		get_tree().reload_current_scene()
-	elif len(get_tree().get_nodes_in_group("Enemy")) <= 0:
-		await get_tree().create_timer(0.25).timeout
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		OS.alert("You win!")
-		# TODO: change scene
-		get_tree().quit()
 	
 	# Right Joystick
 	var joystick_index = 0
