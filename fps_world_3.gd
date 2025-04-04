@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var next_level = "res://fps_world_3.tscn"
+@export var next_level = "none"
 
 func _process(delta: float) -> void:
 	if len(get_tree().get_nodes_in_group("Enemy")) <= 0:
