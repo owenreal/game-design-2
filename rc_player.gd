@@ -5,6 +5,21 @@ const MAX_RPM = 400
 const MAX_TORQUE = 200
 const HORSE_POWER = 200
 
+var laps = 1
+var checkpoints = [false, false, false, false]
+
+func reset_checkpoints():
+	checkpoints = [false, false, false, false]
+
+func do_lap():
+	laps += 1
+	reset_checkpoints()
+	if laps > 3:
+		await get_tree().create_timer(0.25).timeout
+		OS.alert("YOU WIN") # level chang
+	else:
+		$Label2.text = "Lap %d/3" % laps
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

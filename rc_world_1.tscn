@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://f4te4joik1dv"]
+[gd_scene load_steps=8 format=3 uid="uid://f4te4joik1dv"]
 
 [ext_resource type="MeshLibrary" uid="uid://dlv2awqwx6ree" path="res://assets/meshes/rc_tiles_1.tres" id="1_orelr"]
 [ext_resource type="PackedScene" uid="uid://b8263va8q2kn1" path="res://rc_player.tscn" id="2_w7q12"]
 [ext_resource type="PackedScene" uid="uid://cv5n4imougkru" path="res://rc_enemy.tscn" id="3_rjgen"]
+[ext_resource type="PackedScene" uid="uid://oiwd2vfr6qbb" path="res://rc_checkpoint.tscn" id="4_hy7tj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l1t78"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -36,7 +37,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="rc_player" parent="." instance=ExtResource("2_w7q12")]
-transform = Transform3D(0.000436381, 0, -1, 0, 1, 0, 1, 0, 0.000436381, 18.3605, 0.263546, 15.6401)
+transform = Transform3D(0.000436381, 0, -1, 0, 1, 0, 1, 0, 0.000436381, 22.0887, 0.263546, 15.6401)
 
 [node name="rc_enemy" parent="." instance=ExtResource("3_rjgen")]
 transform = Transform3D(-0.0722822, 0.0198164, 0.997188, -0.00223295, 0.999797, -0.0200302, -0.997382, -0.00367449, -0.0722233, 37.7545, 0.0317688, 14.6396)
@@ -49,3 +50,18 @@ transform = Transform3D(-0.0321798, 0.019948, 0.999283, -0.00223295, 0.999797, -
 
 [node name="rc_enemy3" parent="." instance=ExtResource("3_rjgen")]
 transform = Transform3D(-4.37114e-08, 0.00349065, 0.999994, 0, 0.999994, -0.00349065, -1, -1.52581e-10, -4.37111e-08, 37.6389, 0.0081246, 17.0514)
+
+[node name="rc_checkpoint" parent="." instance=ExtResource("4_hy7tj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.982, 0, 16.669)
+checkpoint_index = 3
+
+[node name="rc_checkpoint2" parent="." instance=ExtResource("4_hy7tj")]
+transform = Transform3D(0.0197384, 0, -0.999805, 0, 1, 0, 0.999805, 0, 0.0197384, 120.111, 4.63041, 88.0673)
+
+[node name="rc_checkpoint3" parent="." instance=ExtResource("4_hy7tj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.2226, 17.2743, 151.514)
+checkpoint_index = 1
+
+[node name="rc_checkpoint4" parent="." instance=ExtResource("4_hy7tj")]
+transform = Transform3D(0.0299279, 0, -0.999552, 0, 1, 0, 0.999552, 0, 0.0299279, -62.3926, 5.23218, 72.9372)
+checkpoint_index = 2
